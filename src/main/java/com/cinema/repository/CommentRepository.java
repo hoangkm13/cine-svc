@@ -1,6 +1,6 @@
 package com.cinema.repository;
 
-import com.cinema.model.Comment;
+import com.cinema.entities.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

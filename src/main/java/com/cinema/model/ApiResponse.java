@@ -1,4 +1,4 @@
-package com.example.customersvc.model;
+package com.cinema.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

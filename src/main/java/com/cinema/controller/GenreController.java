@@ -2,7 +2,7 @@ package com.cinema.controller;
 
 import com.cinema.exception.HttpException;
 import com.cinema.exception.InternalServerException;
-import com.cinema.model.Genre;
+import com.cinema.entities.Genre;
 import com.cinema.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

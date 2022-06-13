@@ -1,7 +1,7 @@
 package com.cinema.controller;
 
-import com.cinema.entity.ViewCountDTO;
-import com.cinema.entity.ViewDTO;
+import com.cinema.controller.request.ViewCountDTO;
+import com.cinema.controller.request.ViewDTO;
 import com.cinema.exception.BadRequestException;
 import com.cinema.exception.HttpException;
 import com.cinema.exception.InternalServerException;

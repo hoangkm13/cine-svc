@@ -1,12 +1,12 @@
 package com.cinema.controller;
 
-import com.cinema.entity.LoginRequestDTO;
-import com.cinema.entity.LoginResponseDTO;
-import com.cinema.entity.UserDTO;
+import com.cinema.controller.request.LoginRequestDTO;
+import com.cinema.controller.request.LoginResponseDTO;
+import com.cinema.controller.request.UserDTO;
 import com.cinema.exception.BadRequestException;
 import com.cinema.exception.HttpException;
 import com.cinema.exception.InternalServerException;
-import com.cinema.model.User;
+import com.cinema.entities.User;
 import com.cinema.service.UserService;
 import com.cinema.util.GeneralUtils;
 import com.cinema.util.TokenUtils;

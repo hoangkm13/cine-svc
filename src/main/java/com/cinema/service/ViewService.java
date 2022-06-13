@@ -1,6 +1,6 @@
 package com.cinema.service;
 
-import com.cinema.entity.ViewDTO;
+import com.cinema.controller.request.ViewDTO;
 
 public interface ViewService {
     long countByFilmId(Long userId);

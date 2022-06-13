@@ -1,4 +1,4 @@
-package com.cinema.entity;
+package com.cinema.controller.request;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;

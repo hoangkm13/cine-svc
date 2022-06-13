@@ -1,6 +1,6 @@
 package com.cinema.security;
 
-import com.cinema.model.User;
+import com.cinema.entities.User;
 import com.cinema.service.UserService;
 import com.cinema.util.TokenUtils;
 import com.auth0.jwt.exceptions.JWTVerificationException;

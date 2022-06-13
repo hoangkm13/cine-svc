@@ -1,6 +1,6 @@
-package com.example.customersvc.exception;
+package com.cinema;
 
-import com.example.customersvc.constants.ErrorCode;
+import com.cinema.constants.ErrorCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

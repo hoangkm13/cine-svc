@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class CredentialUser {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -43,14 +43,14 @@ public class CredentialUser {
     private List<Favorite> favorites = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "credentialUser")
+    @OneToMany(mappedBy = "user")
     private List<Like> likes = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "credentialUser")
+    @OneToMany(mappedBy = "user")
     private List<Dislike> dislikes = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "credentialUser")
+    @OneToMany(mappedBy = "user")
     private List<Comment> comments = new ArrayList<>();
 }

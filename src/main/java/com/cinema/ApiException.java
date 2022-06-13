@@ -1,4 +1,4 @@
-package com.example.customersvc.exception;
+package com.cinema;
 
 import org.springframework.http.HttpStatus;
 

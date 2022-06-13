@@ -1,7 +1,7 @@
 package com.cinema.service.impl;
 
-import com.cinema.entity.ViewDTO;
-import com.cinema.model.View;
+import com.cinema.controller.request.ViewDTO;
+import com.cinema.entities.View;
 import com.cinema.repository.ViewRepository;
 import com.cinema.service.ViewService;
 import lombok.RequiredArgsConstructor;

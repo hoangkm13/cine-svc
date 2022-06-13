@@ -1,7 +1,7 @@
-package com.example.customersvc.exception;
+package com.cinema;
 
-import com.example.customersvc.constants.ErrorCode;
-import com.example.customersvc.model.ApiResponse;
+import com.cinema.constants.ErrorCode;
+import com.cinema.model.ApiResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

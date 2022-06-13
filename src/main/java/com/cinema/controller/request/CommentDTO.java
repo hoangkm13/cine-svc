@@ -1,11 +1,10 @@
-package com.cinema.entity;
+package com.cinema.controller.request;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
