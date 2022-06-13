@@ -69,9 +69,11 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public void deleteLike(Long id) throws CustomException {
+    public Like deleteLike(Long id) throws CustomException {
         var entity = this.findByLikeId(id);
         this.likeRepository.deleteById(entity.getId());
+
+        return entity;
     }
 
     @Override
@@ -90,9 +92,11 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public void deleteDislike(Long id) throws CustomException {
+    public Dislike deleteDislike(Long id) throws CustomException {
         var entity = this.findByDislikeId(id);
         this.dislikeRepository.deleteById(entity.getId());
+
+        return entity;
     }
 
     @Override

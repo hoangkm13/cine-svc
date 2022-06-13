@@ -1,11 +1,9 @@
 package com.cinema.controller;
 
-import com.cinema.exception.HttpException;
-import com.cinema.exception.InternalServerException;
 import com.cinema.entities.Genre;
+import com.cinema.model.ApiResponse;
 import com.cinema.service.GenreService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +17,7 @@ public class GenreController {
     private final GenreService genreService;
 
     @GetMapping
-    public ResponseEntity<List<Genre>> getAllGenres() {
-        try {
-            return ResponseEntity.ok(genreService.findAll());
-        } catch (HttpException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new InternalServerException(ex.getMessage());
-        }
+    public ApiResponse<List<Genre>> getAllGenres() {
+        return ApiResponse.successWithResult(genreService.findAll());
     }
 }

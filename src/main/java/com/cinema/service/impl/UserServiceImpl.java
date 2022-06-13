@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final AuthUtils authUtils;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public UserDetails loadUserByUsername(String username) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isEmpty()) {
@@ -46,7 +45,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public User findByUsername(String username) throws CustomException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isEmpty()) {
@@ -56,7 +54,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public User createUser(UserDTO userDTO) throws CustomException {
         if (userRepository.existsByUsername(userDTO.getUsername())) {
             throw new CustomException(ErrorCode.USERNAME_EXIST);

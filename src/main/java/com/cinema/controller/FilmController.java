@@ -51,7 +51,7 @@ public class FilmController {
     }
 
     @GetMapping("/{genre}")
-    public ApiResponse<Page<Film>> getFilmsByGenre(@PathVariable("genre") String genreName, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy) {
+    public ApiResponse<Page<Film>> getFilmsByGenre(@PathVariable("genre") String genreName, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy) throws CustomException {
         Genre genre = genreService.findByName(genreName);
         return ApiResponse.successWithResult(filmService.findAllByGenres(genre, page - 1, size, sortBy));
     }
@@ -109,22 +109,19 @@ public class FilmController {
 
     @DeleteMapping("/comment/{id}")
     public ApiResponse<Comment> deleteComment(@PathVariable Long id) throws CustomException {
-        return ApiResponse.successWithResult(this.filmService.deleteComment(id), "Delete Comment Successfully")
+        return ApiResponse.successWithResult(this.filmService.deleteComment(id), "Delete Comment Successfully");
 
     }
 
     @DeleteMapping("/like/{id}")
     public ApiResponse<Like> deleteLike(@PathVariable Long id) throws CustomException {
 
-        this.filmService.deleteLike(id);
-        return ApiResponse.noContent().build();
+        return ApiResponse.successWithResult(this.filmService.deleteLike(id));
 
     }
 
     @DeleteMapping("/dislike/{id}")
     public ApiResponse<Dislike> deleteDislike(@PathVariable Long id) throws CustomException {
-
-        this.filmService.deleteDislike(id);
-        return ApiResponse.noContent().build();
+        return ApiResponse.successWithResult(this.filmService.deleteDislike(id));
     }
 }

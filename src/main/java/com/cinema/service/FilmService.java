@@ -19,13 +19,13 @@ public interface FilmService {
 
     Like createLike(Like like);
 
-    void deleteLike(Long id) throws CustomException;
+    Like deleteLike(Long id) throws CustomException;
 
     Like findByLikeId(Long id) throws CustomException;
 
     Dislike createDislike(Dislike dislike);
 
-    void deleteDislike(Long id) throws CustomException;
+    Dislike deleteDislike(Long id) throws CustomException;
 
     Dislike findByDislikeId(Long id) throws CustomException;
 

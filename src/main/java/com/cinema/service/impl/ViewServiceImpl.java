@@ -22,5 +22,6 @@ public class ViewServiceImpl implements ViewService {
     @Override
     public void createView(ViewDTO viewDTO) {
         viewRepository.save(modelMapper.map(viewDTO, View.class));
+
     }
 }

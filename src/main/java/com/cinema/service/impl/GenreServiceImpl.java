@@ -18,7 +18,6 @@ public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public List<Genre> findAll() {
         return genreRepository.findAll();
     }
