@@ -1,4 +1,4 @@
-package com.cinema.model;
+package com.cinema.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "dislikes", uniqueConstraints = {
-        @UniqueConstraint(name = "DISLIKE_UC_FILM_ID_USER_ID", columnNames = {"film_id", "user_id"})})
-public class Dislike {
+@Table(name = "comments")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,12 +25,16 @@ public class Dislike {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(nullable = false)
+    private String commentText;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
 
-
-
+    @Column(updatable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date createdAt;
 
 }

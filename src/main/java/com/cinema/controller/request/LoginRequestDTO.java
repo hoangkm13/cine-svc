@@ -1,4 +1,5 @@
-package com.cinema.entity;
+package com.cinema.controller.request;
+
 
 import lombok.*;
 
@@ -7,12 +8,10 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FavoriteDTO {
-    private Long id;
+public class LoginRequestDTO {
+    @NotNull
+    private String username;
 
     @NotNull
-    private Long filmId;
-
-    @NotNull
-    private Long userId;
+    private String password;
 }

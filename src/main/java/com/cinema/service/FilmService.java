@@ -1,7 +1,7 @@
 package com.cinema.service;
 
-import com.cinema.entity.FilmDTO;
-import com.cinema.model.*;
+import com.cinema.exception.CustomException;
+import com.cinema.entities.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public interface FilmService {
     List<Film> findAllByGenres(Long genreId, int page, int size, String sortBy, List<Long> exludedFilmIds);
 
-    Film findById(Long filmId);
+    Film findById(Long filmId) throws CustomException;
 
     Page<Film> findAllByGenres(Genre genre, int page, int size, String sortBy);
 
@@ -19,20 +19,20 @@ public interface FilmService {
 
     Like createLike(Like like);
 
-    void deleteLike(Long id);
+    Like deleteLike(Long id) throws CustomException;
 
-    Like findByLikeId(Long id);
+    Like findByLikeId(Long id) throws CustomException;
 
     Dislike createDislike(Dislike dislike);
 
-    void deleteDislike(Long id);
+    Dislike deleteDislike(Long id) throws CustomException;
 
-    Dislike findByDislikeId(Long id);
+    Dislike findByDislikeId(Long id) throws CustomException;
 
     Comment createComment(Comment comment);
 
-    void deleteComment(Long id);
+    Comment deleteComment(Long id) throws CustomException;
 
-    Comment findByCommentId(Long id);
+    Comment findByCommentId(Long id) throws CustomException;
 
 }

@@ -1,21 +1,19 @@
-package com.cinema.model;
+package com.cinema.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "UC_FILM_ID_USER_ID", columnNames = {"film_id", "user_id"})})
-public class Favorite {
+public class View {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +21,12 @@ public class Favorite {
     @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
-
-    @JsonIgnore
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(insertable = false, updatable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date createdAt;
 }

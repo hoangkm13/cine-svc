@@ -1,7 +1,6 @@
-package com.cinema.entity;
+package com.cinema.controller.request;
 
-import com.cinema.model.Film;
-import com.cinema.model.Genre;
+import com.cinema.entities.Genre;
 import lombok.*;
 
 import java.util.List;

@@ -1,13 +1,14 @@
 package com.cinema.service;
 
-import com.cinema.entity.UserDTO;
-import com.cinema.model.User;
+import com.cinema.exception.CustomException;
+import com.cinema.controller.request.UserDTO;
+import com.cinema.entities.User;
 
 public interface UserService {
-    User findByUsername(String username);
+    User findByUsername(String username) throws CustomException;
 
-    User createUser(UserDTO userDTO);
+    User createUser(UserDTO userDTO) throws CustomException;
 
-    void checkPermission(Long userId);
-    User  findById(Long userId);
+    void checkPermission(Long userId) throws CustomException;
+    User  findById(Long userId) throws CustomException;
 }

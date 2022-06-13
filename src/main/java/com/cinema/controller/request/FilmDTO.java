@@ -1,6 +1,6 @@
-package com.cinema.entity;
+package com.cinema.controller.request;
 
-import com.cinema.model.*;
+import com.cinema.entities.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

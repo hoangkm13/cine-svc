@@ -1,8 +1,8 @@
 package com.cinema.service.impl;
 
-import com.cinema.entity.FilmDTO;
-import com.cinema.exception.NotFoundException;
-import com.cinema.model.*;
+import com.cinema.exception.CustomException;
+import com.cinema.constants.ErrorCode;
+import com.cinema.entities.*;
 import com.cinema.repository.CommentRepository;
 import com.cinema.repository.DislikeRepository;
 import com.cinema.repository.FilmRepository;
@@ -16,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,30 +31,27 @@ public class FilmServiceImpl implements FilmService {
     private final CommentRepository commentRepository;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public List<Film> findAllByGenres(Long genreId, int page, int size, String sortBy, List<Long> exludedFilmIds) {
         int offset = page * size;
         return filmRepository.findAllByGenres(genreId, offset, size, sortBy, exludedFilmIds);
     }
 
     @Override
-    public Film findById(Long filmId) {
+    public Film findById(Long filmId) throws CustomException {
         Optional<Film> optionalFilm = filmRepository.findById(filmId);
         if (optionalFilm.isEmpty()) {
-            throw new NotFoundException("Could not find film with id: " + filmId);
+            throw new CustomException(ErrorCode.FILM_NOT_EXIST);
         }
         return optionalFilm.get();
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Page<Film> findAllByGenres(Genre genre, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return filmRepository.findAllByGenres(genre, pageable);
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Page<Film> findFavoriteFilmsByUserId(Long userId, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size); // order will not work in repo
         return filmRepository.findFavoriteFilmsByUserId(userId, pageable);
@@ -73,16 +69,18 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public void deleteLike(Long id) {
+    public Like deleteLike(Long id) throws CustomException {
         var entity = this.findByLikeId(id);
         this.likeRepository.deleteById(entity.getId());
+
+        return entity;
     }
 
     @Override
-    public Like findByLikeId(Long id) {
+    public Like findByLikeId(Long id) throws CustomException {
         var entity = this.likeRepository.findById(id);
-        if (entity.isEmpty()){
-            throw new NotFoundException("Khong tim thay Like");
+        if (entity.isEmpty()) {
+            throw new CustomException(ErrorCode.LIKE_NOT_EXIST);
         }
         return entity.get();
     }
@@ -94,16 +92,18 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public void deleteDislike(Long id) {
+    public Dislike deleteDislike(Long id) throws CustomException {
         var entity = this.findByDislikeId(id);
         this.dislikeRepository.deleteById(entity.getId());
+
+        return entity;
     }
 
     @Override
-    public Dislike findByDislikeId(Long id) {
+    public Dislike findByDislikeId(Long id) throws CustomException {
         var entity = this.dislikeRepository.findById(id);
-        if (entity.isEmpty()){
-            throw new NotFoundException("Khong tim thay Dislike");
+        if (entity.isEmpty()) {
+            throw new CustomException(ErrorCode.DISLIKE_NOT_EXIST);
         }
         return entity.get();
     }
@@ -114,16 +114,18 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public void deleteComment(Long id) {
+    public Comment deleteComment(Long id) throws CustomException {
         var entity = this.findByCommentId(id);
         this.commentRepository.deleteById(entity.getId());
+
+        return entity;
     }
 
     @Override
-    public Comment findByCommentId(Long id) {
+    public Comment findByCommentId(Long id) throws CustomException {
         var entity = this.commentRepository.findById(id);
-        if (entity.isEmpty()){
-            throw new NotFoundException("Khong tim thay Comment");
+        if (entity.isEmpty()) {
+            throw new CustomException(ErrorCode.COMMENT_NOT_EXIST);
         }
         return entity.get();
     }

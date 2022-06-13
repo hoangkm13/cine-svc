@@ -1,6 +1,7 @@
 package com.cinema.security;
 
-import com.cinema.model.User;
+import com.cinema.exception.CustomException;
+import com.cinema.entities.User;
 import com.cinema.service.UserService;
 import com.cinema.util.TokenUtils;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -51,7 +52,7 @@ public class AuthFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 filterChain.doFilter(request, response);
-            } catch (JWTVerificationException e) {
+            } catch (JWTVerificationException | CustomException e) {
                 response.setStatus(HttpStatus.FORBIDDEN.value());
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 Map<String, String> error = new HashMap<>();

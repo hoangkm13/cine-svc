@@ -1,6 +1,6 @@
 package com.cinema.repository;
 
-import com.cinema.model.Dislike;
+import com.cinema.entities.Dislike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

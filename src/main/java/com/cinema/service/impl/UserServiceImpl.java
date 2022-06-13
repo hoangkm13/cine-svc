@@ -1,16 +1,14 @@
 package com.cinema.service.impl;
 
-import com.cinema.entity.UserDTO;
+import com.cinema.exception.CustomException;
+import com.cinema.constants.ErrorCode;
+import com.cinema.controller.request.UserDTO;
+import com.cinema.entities.User;
 import com.cinema.enums.Role;
-import com.cinema.exception.BadRequestException;
-import com.cinema.exception.NotFoundException;
-import com.cinema.exception.UnauthorizedException;
-import com.cinema.model.User;
 import com.cinema.repository.UserRepository;
 import com.cinema.service.UserService;
 import com.cinema.util.AuthUtils;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +31,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final AuthUtils authUtils;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public UserDetails loadUserByUsername(String username) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isEmpty()) {
@@ -46,25 +42,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         authorities.add(authority);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
-    
+
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public User findByUsername(String username) {
+    public User findByUsername(String username) throws CustomException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isEmpty()) {
-            throw new NotFoundException("Could not find user with username: " + username);
+            throw new CustomException(ErrorCode.USER_NOT_EXIST);
         }
         return optionalUser.get();
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public User createUser(UserDTO userDTO) {
+    public User createUser(UserDTO userDTO) throws CustomException {
         if (userRepository.existsByUsername(userDTO.getUsername())) {
-            throw new BadRequestException("This username has been taken");
+            throw new CustomException(ErrorCode.USERNAME_EXIST);
         }
         if (userRepository.existsByEmail(userDTO.getEmail())) {
-            throw new BadRequestException("This email already exists");
+            throw new CustomException(ErrorCode.EMAIL_EXIST);
         }
 
         User user = new User();
@@ -77,20 +71,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void checkPermission(Long userId) {
+    public void checkPermission(Long userId) throws CustomException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = findByUsername(authentication.getName());
         if (!userId.equals(currentUser.getId()) && !authUtils.isAdmin()) {
-            throw new UnauthorizedException("You don't have enough permison");
+            throw new CustomException(ErrorCode.AUTHORIZATION_ERROR);
         }
     }
 
     @Override
-    public User findById(Long userId) {
+    public User findById(Long userId) throws CustomException {
         var user = this.userRepository.findById(userId);
-        if (user.isEmpty()){
-            throw new NotFoundException("Không tìm thấy user");
+        if (user.isEmpty()) {
+            throw new CustomException(ErrorCode.USER_NOT_EXIST);
         }
 
         return user.get();
