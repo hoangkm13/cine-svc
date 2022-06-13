@@ -1,0 +1,1 @@
+INSERT INTO `user` VALUES (1,'nttung@gmail.com','$2a$10$jhaGyhYVKuJkdHvV1nWEnONRcmTGi4lXt4f7kVaq4CgnWA2Fg2NrS','ROLE_ADMIN','nttung');
