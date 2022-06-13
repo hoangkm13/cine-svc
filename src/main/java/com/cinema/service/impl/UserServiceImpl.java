@@ -1,6 +1,6 @@
 package com.cinema.service.impl;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.constants.ErrorCode;
 import com.cinema.controller.request.UserDTO;
 import com.cinema.entities.User;
@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

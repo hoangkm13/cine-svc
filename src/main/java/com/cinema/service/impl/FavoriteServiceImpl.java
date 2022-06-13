@@ -1,6 +1,6 @@
 package com.cinema.service.impl;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.constants.ErrorCode;
 import com.cinema.controller.request.FavoriteDTO;
 import com.cinema.entities.Favorite;

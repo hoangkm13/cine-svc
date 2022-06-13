@@ -1,6 +1,6 @@
 package com.cinema.service;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.entities.Genre;
 
 import java.util.List;

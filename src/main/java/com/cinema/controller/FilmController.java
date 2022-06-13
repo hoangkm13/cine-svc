@@ -1,6 +1,6 @@
 package com.cinema.controller;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.controller.request.*;
 import com.cinema.entities.*;
 import com.cinema.model.ApiResponse;

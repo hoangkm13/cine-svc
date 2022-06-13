@@ -1,6 +1,6 @@
 package com.cinema.security;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.entities.User;
 import com.cinema.service.UserService;
 import com.cinema.util.TokenUtils;

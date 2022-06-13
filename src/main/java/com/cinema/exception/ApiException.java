@@ -1,4 +1,4 @@
-package com.cinema;
+package com.cinema.exception;
 
 import org.springframework.http.HttpStatus;
 

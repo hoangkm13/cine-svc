@@ -1,13 +1,12 @@
 package com.cinema.service.impl;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.constants.ErrorCode;
 import com.cinema.entities.Genre;
 import com.cinema.repository.GenreRepository;
 import com.cinema.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

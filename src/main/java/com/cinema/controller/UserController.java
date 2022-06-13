@@ -1,6 +1,6 @@
 package com.cinema.controller;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.controller.request.LoginRequestDTO;
 import com.cinema.controller.request.LoginResponseDTO;
 import com.cinema.controller.request.UserDTO;

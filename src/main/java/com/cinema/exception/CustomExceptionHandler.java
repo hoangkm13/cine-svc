@@ -1,4 +1,4 @@
-package com.cinema;
+package com.cinema.exception;
 
 import com.cinema.constants.ErrorCode;
 import com.cinema.model.ApiResponse;

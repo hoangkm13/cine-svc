@@ -1,13 +1,12 @@
 package com.cinema.controller;
 
-import com.cinema.CustomException;
+import com.cinema.exception.CustomException;
 import com.cinema.controller.request.FavoriteDTO;
 import com.cinema.entities.Favorite;
 import com.cinema.model.ApiResponse;
 import com.cinema.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
