@@ -9,7 +9,6 @@ public enum ErrorCode {
     AUTHORIZATION_ERROR("AUTHORIZATION_ERROR", "Lỗi xác thực"),
     CUSTOMER_NOT_EXIST("CUSTOMER_NOT_EXIST", "Khách hàng không tồn tại"),
     CUSTOMER_EXIST("CUSTOMER_EXIST", "Khách hàng tồn tại"),
-
     USER_NOT_EXIST("USER_NOT_EXIST", "Người dùng không tồn tại"),
     USER_EXIST("USER_EXIST", "Người dùng tồn tại"),
     USERNAME_NOT_EXIST("USERNAME_NOT_EXIST", "Tên người dùng không tồn tại"),
