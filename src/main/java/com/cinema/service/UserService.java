@@ -1,5 +1,6 @@
 package com.cinema.service;
 
+import com.cinema.controller.request.UpdateUserDTO;
 import com.cinema.exception.CustomException;
 import com.cinema.controller.request.UserDTO;
 import com.cinema.entities.User;
@@ -11,4 +12,5 @@ public interface UserService {
 
     void checkPermission(Long userId) throws CustomException;
     User  findById(Long userId) throws CustomException;
+    User preCheckUpdateUserInfo(UpdateUserDTO updateUserDTO, Long currentUserId, Long userId) throws CustomException;
 }

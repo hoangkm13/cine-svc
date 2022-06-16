@@ -1,10 +1,11 @@
 package com.cinema.service.impl;
 
-import com.cinema.exception.CustomException;
 import com.cinema.constants.ErrorCode;
+import com.cinema.controller.request.UpdateUserDTO;
 import com.cinema.controller.request.UserDTO;
 import com.cinema.entities.User;
 import com.cinema.enums.Role;
+import com.cinema.exception.CustomException;
 import com.cinema.repository.UserRepository;
 import com.cinema.service.UserService;
 import com.cinema.util.AuthUtils;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -62,7 +64,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         User user = new User();
-        user.setId(null);
+        user.setFullName(userDTO.getFullName());
+        user.setGender(userDTO.getGender());
+        user.setBirthOfDate(userDTO.getBirthOfDate());
+        user.setMobile(userDTO.getMobile());
         user.setRole(Role.USER.getValue());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
@@ -87,5 +92,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         return user.get();
+    }
+
+    @Override
+    public User preCheckUpdateUserInfo(UpdateUserDTO updateUserDTO, Long currentUserId, Long userId) throws CustomException {
+        var existedUser = this.findById(currentUserId);
+
+        if (!Objects.equals(existedUser.getRole(), Role.ADMIN.getValue())) {
+            if (!Objects.equals(userId, existedUser.getId())) {
+                throw new CustomException(ErrorCode.AUTHORIZATION_ERROR);
+            }
+        }
+        return this.updateUser123(updateUserDTO, existedUser);
+    }
+
+    private User updateUser123(UpdateUserDTO updateUserDTO, User existedUser) {
+
+        existedUser.setFullName(updateUserDTO.getFullName() != null ? updateUserDTO.getFullName() : existedUser.getFullName());
+        existedUser.setGender(updateUserDTO.getGender() != null ? updateUserDTO.getGender() : existedUser.getGender());
+        existedUser.setBirthOfDate(updateUserDTO.getBirthOfDate()!= null ? updateUserDTO.getBirthOfDate() : existedUser.getBirthOfDate());
+        existedUser.setMobile(updateUserDTO.getMobile() != null ? updateUserDTO.getMobile() : existedUser.getMobile());
+        existedUser.setEmail(updateUserDTO.getEmail() != null ? updateUserDTO.getEmail() : existedUser.getEmail());
+
+        this.userRepository.saveAndFlush(existedUser);
+
+        return existedUser;
     }
 }

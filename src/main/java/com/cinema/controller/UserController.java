@@ -1,5 +1,6 @@
 package com.cinema.controller;
 
+import com.cinema.controller.request.UpdateUserDTO;
 import com.cinema.exception.CustomException;
 import com.cinema.controller.request.LoginRequestDTO;
 import com.cinema.controller.request.LoginResponseDTO;
@@ -48,6 +49,13 @@ public class UserController {
     @PostMapping("/register")
     public ApiResponse<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws CustomException {
         var user = userService.createUser(userDTO);
+        return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
+    }
+
+    @PutMapping("{userId}")
+    public ApiResponse<UserDTO> updateUser(@PathVariable Long userId, @Valid @RequestBody UpdateUserDTO userDTO) throws CustomException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var user = userService.preCheckUpdateUserInfo(userDTO, Long.valueOf(authentication.getPrincipal().toString()), userId);
         return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
     }
 }
