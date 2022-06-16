@@ -26,7 +26,8 @@ public enum ErrorCode {
     FAVOURITE_NOT_EXIST("FAVOURITE_NOT_EXIST", "Yêu thích không tồn tại"),
     FAVOURITE_EXIST("FAVOURITE_EXIST", "Phim đã được yêu thích"),
     GENRE_NOT_EXIST("GENRE_NOT_EXIST", "Thể loại không tồn tại"),
-    GENRE_EXIST("GENRE_EXIST", "Thể loại tồn tại");
+    GENRE_EXIST("GENRE_EXIST", "Thể loại tồn tại"),
+    INVALID_ORDER_BY_METHOD("INVALID_ORDER_BY_METHOD", "Phương thức sắp xếp sai");
     private final String message;
     private final String code;
 

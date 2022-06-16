@@ -1,8 +1,8 @@
 package com.cinema.service.impl;
 
-import com.cinema.exception.CustomException;
 import com.cinema.constants.ErrorCode;
 import com.cinema.entities.*;
+import com.cinema.exception.CustomException;
 import com.cinema.repository.CommentRepository;
 import com.cinema.repository.DislikeRepository;
 import com.cinema.repository.FilmRepository;
@@ -11,13 +11,13 @@ import com.cinema.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -110,6 +110,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Comment createComment(Comment comment) {
+        comment.setCreatedAt(LocalDateTime.now().toString());
         return this.commentRepository.save(comment);
     }
 
@@ -128,6 +129,24 @@ public class FilmServiceImpl implements FilmService {
             throw new CustomException(ErrorCode.COMMENT_NOT_EXIST);
         }
         return entity.get();
+    }
+
+    @Override
+    public Page<Comment> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
+        if (!Objects.equals(orderBy, "ASC") && !Objects.equals(orderBy, "DSC")) {
+            throw new CustomException(ErrorCode.INVALID_ORDER_BY_METHOD);
+        }
+        var film = this.findById(filmId);
+        switch (orderBy) {
+            case "ASC" -> film.getComments().sort(Comparator.comparing(Comment::getCreatedAt));
+            case "DSC" -> film.getComments().sort(Comparator.comparing(Comment::getCreatedAt).reversed());
+            default -> {
+            }
+        }
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+
+        return new PageImpl<>(film.getComments(), pageable, film.getComments().size());
     }
 
 }

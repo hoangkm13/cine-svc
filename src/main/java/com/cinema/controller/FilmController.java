@@ -124,4 +124,10 @@ public class FilmController {
     public ApiResponse<Dislike> deleteDislike(@PathVariable Long id) throws CustomException {
         return ApiResponse.successWithResult(this.filmService.deleteDislike(id));
     }
+
+    @GetMapping("/comment/pagination/{filmId}")
+    public ApiResponse<Page<Comment>> getCommentPagination(@PathVariable Long filmId, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy, @RequestParam String orderBy) throws CustomException {
+        var entity = this.filmService.getCommentPagination(filmId, page, size, sortBy, orderBy);
+        return ApiResponse.successWithResult(entity);
+    }
 }
