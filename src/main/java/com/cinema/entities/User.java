@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +22,28 @@ public class User {
     @Column(nullable = false)
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String username;
 
-    @Column(nullable = false)
+    @Column(length = 50)
+    private String fullName;
+
+    @NotBlank(message = "Giới tính không được để trống !")
+    private String gender;
+
+    @Column(length = 50)
+    private String birthOfDate;
+
+    @Column(length = 50)
+    private String mobile;
+
+    @Column()
     private String password;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private String role;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String email;
 
     @JsonIgnore
