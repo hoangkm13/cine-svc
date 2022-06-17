@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("https://demo-cine-web.herokuapp.com")
 @RequestMapping("/api")
 public class FavoriteController {
     private final FavoriteService favoriteService;
