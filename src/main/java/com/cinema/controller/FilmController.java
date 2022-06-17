@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("https://demo-cine-web.herokuapp.com")
 @RequestMapping("/api/films")
 public class FilmController {
     private final FilmService filmService;
