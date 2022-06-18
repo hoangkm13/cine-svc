@@ -1,5 +1,6 @@
-package com.cinema.security;
+package com.cinema.config;
 
+import com.cinema.security.AuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

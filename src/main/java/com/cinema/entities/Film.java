@@ -71,6 +71,10 @@ public class Film {
     )
     private List<Actor> actors = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "director_id")
+    private Director director;
+
     @OneToMany(mappedBy = "film")
     private List<Like> likes = new ArrayList<>();
 

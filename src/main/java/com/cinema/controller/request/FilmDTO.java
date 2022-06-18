@@ -38,6 +38,8 @@ public class FilmDTO {
 
     private List<Genre> genres = new ArrayList<>();
 
+    private Director director;
+
     private List<View> views = new ArrayList<>();
 
     private Integer ratingStar;
