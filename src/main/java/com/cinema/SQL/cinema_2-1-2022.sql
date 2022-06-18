@@ -19,7 +19,7 @@
 -- Table structure for table `actor`
 --
 
-use heroku_8c4f14ca7f17f34;
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 
 DROP TABLE IF EXISTS `actor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

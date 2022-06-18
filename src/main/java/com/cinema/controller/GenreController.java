@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("https://demo-cine-web.herokuapp.com")
+@CrossOrigin("*")
 @RequestMapping("/api/genres")
 public class GenreController {
     private final GenreService genreService;

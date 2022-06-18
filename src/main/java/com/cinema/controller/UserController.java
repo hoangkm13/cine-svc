@@ -21,7 +21,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("https://demo-cine-web.herokuapp.com")
+@CrossOrigin("*")
 @RequestMapping("/api/auth")
 public class UserController {
     private final AuthenticationManager authenticationManager;

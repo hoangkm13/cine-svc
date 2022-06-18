@@ -7,6 +7,7 @@ import com.cinema.model.ApiResponse;
 import com.cinema.service.FilmService;
 import com.cinema.service.GenreService;
 import com.cinema.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("https://demo-cine-web.herokuapp.com")
+@CrossOrigin("*")
 @RequestMapping("/api/films")
 public class FilmController {
     private final FilmService filmService;
@@ -27,7 +28,8 @@ public class FilmController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/browse")
+    @SecurityRequirements
+    @GetMapping(value = "/browse", produces = "application/json")
     public ApiResponse<List<CategorizedFilmsDTO>> getBrowseData(@RequestParam int size) {
         List<CategorizedFilmsDTO> categorizedFilmsDTOList = new ArrayList<>();
         List<Film> films = new ArrayList<>();
@@ -35,7 +37,7 @@ public class FilmController {
         genres.forEach(genre -> {
             List<Long> excludedFilmsIds = new ArrayList<>();
             excludedFilmsIds.add(0L); // SQl operator IN will not work with empty array
-            excludedFilmsIds.addAll(films.stream().map(Film::getId).toList());
+            excludedFilmsIds.addAll(films.stream().map(Film::getId).collect(Collectors.toList()));
             List<Film> list = filmService.findAllByGenres(genre.getId(), 0, size, "created_at", excludedFilmsIds);
             films.addAll(list);
             List<FilmDTO> filmDTOList = list.stream().map(film -> modelMapper.map(film, FilmDTO.class)).collect(Collectors.toList());

@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("https://demo-cine-web.herokuapp.com")
+@CrossOrigin("*")
 @RequestMapping("/api")
 public class ViewController {
     private final ViewService viewService;

@@ -25,7 +25,6 @@ import java.util.Optional;
 @Log4j2
 public class FilmServiceImpl implements FilmService {
     private final FilmRepository filmRepository;
-    private final ModelMapper modelMapper;
     private final LikeRepository likeRepository;
     private final DislikeRepository dislikeRepository;
     private final CommentRepository commentRepository;
@@ -137,11 +136,16 @@ public class FilmServiceImpl implements FilmService {
             throw new CustomException(ErrorCode.INVALID_ORDER_BY_METHOD);
         }
         var film = this.findById(filmId);
+
         switch (orderBy) {
-            case "ASC" -> film.getComments().sort(Comparator.comparing(Comment::getCreatedAt));
-            case "DSC" -> film.getComments().sort(Comparator.comparing(Comment::getCreatedAt).reversed());
-            default -> {
-            }
+            case "ASC":
+                film.getComments().sort(Comparator.comparing(Comment::getCreatedAt));
+                break;
+            case "DSC":
+                film.getComments().sort(Comparator.comparing(Comment::getCreatedAt).reversed());
+                break;
+            default:
+                break;
         }
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
