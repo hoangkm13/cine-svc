@@ -28,6 +28,8 @@ public class FilmDTO {
     @NotNull
     private String slug;
 
+    private String year;
+
     private List<Actor> actors = new ArrayList<>();
 
     private List<LikeDTO> likes = new ArrayList<>();

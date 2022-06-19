@@ -49,7 +49,7 @@ public class AuthFilter extends OncePerRequestFilter {
                 User user = userService.findByUsername(username);
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 authorities.add(new SimpleGrantedAuthority(user.getRole()));
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getId(), null, authorities);
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getId(), user, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 filterChain.doFilter(request, response);
             } catch (JWTVerificationException | CustomException e) {

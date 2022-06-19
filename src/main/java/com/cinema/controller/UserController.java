@@ -42,8 +42,8 @@ public class UserController {
 
     @GetMapping("/user")
     public ApiResponse<UserDTO> getCurrentUser() throws CustomException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUsername(authentication.getName());
+        User authentication = (User) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+        User user = userService.findByUsername(authentication.getUsername());
         return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
     }
 
