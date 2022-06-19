@@ -28,6 +28,12 @@ public class User {
     @Column(length = 50)
     private String fullName;
 
+    @Column(length = 50)
+    private String firstName;
+
+    @Column(length = 50)
+    private String lastName;
+
     @NotBlank(message = "Giới tính không được để trống !")
     private String gender;
 

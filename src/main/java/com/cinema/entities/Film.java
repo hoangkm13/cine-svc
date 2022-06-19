@@ -36,6 +36,9 @@ public class Film {
     @Column(length = 100, nullable = false)
     private String slug;
 
+    @Column()
+    private Integer year;
+
     @Column(length = 100, nullable = false)
     private Integer ratingStar;
 

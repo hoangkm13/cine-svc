@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -21,6 +22,10 @@ public class UpdateUserDTO {
     private String gender;
 
     private String birthOfDate;
+
+    private String firstName;
+
+    private String lastName;
 
     @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại không hợp lệ")
     private String mobile;

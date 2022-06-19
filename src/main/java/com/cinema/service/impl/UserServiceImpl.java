@@ -71,6 +71,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setRole(Role.USER.getValue());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return userRepository.save(user);
     }
@@ -112,6 +114,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         existedUser.setGender(updateUserDTO.getGender() != null ? updateUserDTO.getGender() : existedUser.getGender());
         existedUser.setBirthOfDate(updateUserDTO.getBirthOfDate()!= null ? updateUserDTO.getBirthOfDate() : existedUser.getBirthOfDate());
         existedUser.setMobile(updateUserDTO.getMobile() != null ? updateUserDTO.getMobile() : existedUser.getMobile());
+        existedUser.setEmail(updateUserDTO.getEmail() != null ? updateUserDTO.getEmail() : existedUser.getEmail());
+        existedUser.setFirstName(updateUserDTO.getFirstName() != null ? updateUserDTO.getFirstName() : existedUser.getFirstName());
+        existedUser.setLastName(updateUserDTO.getLastName() != null ? updateUserDTO.getLastName() : existedUser.getLastName());
         existedUser.setEmail(updateUserDTO.getEmail() != null ? updateUserDTO.getEmail() : existedUser.getEmail());
 
         this.userRepository.saveAndFlush(existedUser);

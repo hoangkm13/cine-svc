@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,12 @@ public class UserDTO {
 
     @NotBlank(message = "Ngày sinh không được để trống !")
     private String birthOfDate;
+
+    @NotBlank(message = "Tên không được để trống")
+    private String firstName;
+
+    @NotBlank(message = "Họ không được để trống")
+    private String lastName;
 
     @NotBlank(message = "Số điện thoại không được để trống !")
     @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại không hợp lệ")
