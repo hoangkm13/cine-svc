@@ -18,7 +18,7 @@ import java.util.List;
 public class GenreController {
     private final GenreService genreService;
 
-    @GetMapping
+    @GetMapping(value = "", produces = "application/json")
     public ApiResponse<List<Genre>> getAllGenres() {
         return ApiResponse.successWithResult(genreService.findAll());
     }

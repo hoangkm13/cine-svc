@@ -43,6 +43,8 @@ public class UserDTO {
     @Length(max = 20, min = 6)
     private String password;
 
+    private String avatar;
+
     private String role;
 
     @NotBlank(message = "Mail không được để trống !")

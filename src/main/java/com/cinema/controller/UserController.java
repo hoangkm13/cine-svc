@@ -29,7 +29,7 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    @PostMapping({"/login"})
+    @PostMapping(value = "/login", produces = "application/json")
     public ApiResponse<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequestDTO.getUsername(),
@@ -40,20 +40,20 @@ public class UserController {
         return ApiResponse.successWithResult(userToken);
     }
 
-    @GetMapping("/user")
+    @GetMapping(value = "/user", produces = "application/json")
     public ApiResponse<UserDTO> getCurrentUser() throws CustomException {
         User authentication = (User) SecurityContextHolder.getContext().getAuthentication().getCredentials();
         User user = userService.findByUsername(authentication.getUsername());
         return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = "/register", produces = "application/json")
     public ApiResponse<UserDTO> register(@Valid @RequestBody UserDTO userDTO) throws CustomException {
         var user = userService.createUser(userDTO);
         return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
     }
 
-    @PutMapping("{userId}")
+    @PutMapping(value = "{userId}", produces = "application/json")
     public ApiResponse<UserDTO> updateUser(@PathVariable Long userId, @Valid @RequestBody UpdateUserDTO userDTO) throws CustomException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var user = userService.preCheckUpdateUserInfo(userDTO, Long.valueOf(authentication.getPrincipal().toString()), userId);

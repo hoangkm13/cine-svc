@@ -34,6 +34,9 @@ public class User {
     @Column(length = 50)
     private String lastName;
 
+    @Column()
+    private String avatar;
+
     @NotBlank(message = "Giới tính không được để trống !")
     private String gender;
 

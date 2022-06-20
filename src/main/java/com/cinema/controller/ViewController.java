@@ -16,12 +16,12 @@ import javax.validation.Valid;
 public class ViewController {
     private final ViewService viewService;
 
-    @GetMapping("films/{id}/views/count")
+    @GetMapping(value = "films/{id}/views/count", produces = "application/json")
     public ApiResponse<ViewCountDTO> getViewCountByFilmId(@PathVariable("id") Long filmId) {
         return ApiResponse.successWithResult(new ViewCountDTO(viewService.countByFilmId(filmId)));
     }
 
-    @PostMapping("/views")
+    @PostMapping(value = "/views", produces = "application/json")
     public ApiResponse<String> createView(@Valid @RequestBody ViewDTO viewDTO) {
         viewService.createView(viewDTO);
         return ApiResponse.successWithResult("Create view successfully");

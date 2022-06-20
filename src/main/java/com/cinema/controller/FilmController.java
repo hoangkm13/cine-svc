@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,26 +48,26 @@ public class FilmController {
         return ApiResponse.successWithResult(categorizedFilmsDTOList);
     }
 
-    @GetMapping("/search")
+    @GetMapping(value = "/search", produces = "application/json")
     public ApiResponse<Page<Film>> getSearchData(@RequestParam String searchText, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy) {
         Page<Film> films = filmService.search(searchText, page - 1, size, sortBy);
         return ApiResponse.successWithResult(films);
     }
 
-    @GetMapping("/{genre}")
+    @GetMapping(value = "/{genre}", produces = "application/json")
     public ApiResponse<Page<Film>> getFilmsByGenre(@PathVariable("genre") String genreName, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy) throws CustomException {
         Genre genre = genreService.findByName(genreName);
         return ApiResponse.successWithResult(filmService.findAllByGenres(genre, page - 1, size, sortBy));
     }
 
-    @GetMapping("/favorites")
+    @GetMapping(value = "/favorites", produces = "application/json")
     public ApiResponse<Page<Film>> getFavoriteFilms(@RequestParam int page, @RequestParam int size, @RequestParam String sortBy) throws CustomException {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(username);
         return ApiResponse.successWithResult(filmService.findFavoriteFilmsByUserId(user.getId(), page - 1, size, sortBy));
     }
 
-    @GetMapping("/singleFilm/{filmId}")
+    @GetMapping(value = "/singleFilm/{filmId}", produces = "application/json")
     public ApiResponse<FilmDTO> getFilmById(@PathVariable("filmId") Long filmId) throws CustomException {
 
         Film film = this.filmService.findById(filmId);
@@ -81,7 +82,7 @@ public class FilmController {
 
     }
 
-    @PostMapping("/like")
+    @PostMapping(value = "/like", produces = "application/json")
     public ApiResponse<LikeDTO> createLike(@RequestBody LikeDTO likeDTO) {
 
         Like like1 = this.filmService.createLike(modelMapper.map(likeDTO, Like.class));
@@ -90,7 +91,7 @@ public class FilmController {
 
     }
 
-    @PostMapping("/dislike")
+    @PostMapping(value = "/dislike", produces = "application/json")
     public ApiResponse<DislikeDTO> createDislike(@RequestBody DislikeDTO dislikeDTO) {
 
         Dislike dislike1 = this.filmService.createDislike(modelMapper.map(dislikeDTO, Dislike.class));
@@ -98,7 +99,7 @@ public class FilmController {
 
     }
 
-    @PostMapping("/comment")
+    @PostMapping(value = "/comment", produces = "application/json")
     public ApiResponse<CommentDTO> createCommentDTO(@RequestBody CommentDTO commentDTO) throws CustomException {
 
         Comment comment1 = this.filmService.createComment(modelMapper.map(commentDTO, Comment.class));
@@ -110,25 +111,25 @@ public class FilmController {
     }
 
 
-    @DeleteMapping("/comment/{id}")
+    @DeleteMapping(value = "/comment/{id}", produces = "application/json")
     public ApiResponse<Comment> deleteComment(@PathVariable Long id) throws CustomException {
         return ApiResponse.successWithResult(this.filmService.deleteComment(id), "Delete Comment Successfully");
 
     }
 
-    @DeleteMapping("/like/{id}")
+    @DeleteMapping(value = "/like/{id}", produces = "application/json")
     public ApiResponse<Like> deleteLike(@PathVariable Long id) throws CustomException {
 
         return ApiResponse.successWithResult(this.filmService.deleteLike(id));
 
     }
 
-    @DeleteMapping("/dislike/{id}")
+    @DeleteMapping(value = "/dislike/{id}", produces = "application/json")
     public ApiResponse<Dislike> deleteDislike(@PathVariable Long id) throws CustomException {
         return ApiResponse.successWithResult(this.filmService.deleteDislike(id));
     }
 
-    @GetMapping("/comment/pagination/{filmId}")
+    @GetMapping(value = "/comment/pagination/{filmId}", produces = "application/json")
     public ApiResponse<Page<Comment>> getCommentPagination(@PathVariable Long filmId, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy, @RequestParam String orderBy) throws CustomException {
         var entity = this.filmService.getCommentPagination(filmId, page, size, sortBy, orderBy);
         return ApiResponse.successWithResult(entity);

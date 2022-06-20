@@ -20,10 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -63,6 +60,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new CustomException(ErrorCode.EMAIL_EXIST);
         }
 
+        Random generator = new Random();
+        int value = generator.nextInt(5) + 1;
+
         User user = new User();
         user.setFullName(userDTO.getFullName());
         user.setGender(userDTO.getGender());
@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setAvatar(value + ".png");
         return userRepository.save(user);
     }
 
