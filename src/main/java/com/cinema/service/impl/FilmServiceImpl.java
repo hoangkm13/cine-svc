@@ -1,6 +1,7 @@
 package com.cinema.service.impl;
 
 import com.cinema.constants.ErrorCode;
+import com.cinema.controller.request.CommentDTO;
 import com.cinema.entities.*;
 import com.cinema.exception.CustomException;
 import com.cinema.repository.CommentRepository;
@@ -15,10 +16,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +26,8 @@ public class FilmServiceImpl implements FilmService {
     private final LikeRepository likeRepository;
     private final DislikeRepository dislikeRepository;
     private final CommentRepository commentRepository;
+
+    private final ModelMapper modelMapper;
 
     @Override
     public List<Film> findAllByGenres(Long genreId, int page, int size, String sortBy, List<Long> exludedFilmIds) {
@@ -131,7 +131,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Page<Comment> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
+    public Page<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
         if (!Objects.equals(orderBy, "ASC") && !Objects.equals(orderBy, "DSC")) {
             throw new CustomException(ErrorCode.INVALID_ORDER_BY_METHOD);
         }
@@ -149,8 +149,14 @@ public class FilmServiceImpl implements FilmService {
         }
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        List<CommentDTO> newCommentFormat = new ArrayList<>();
+        for (Comment comment: film.getComments()) {
+            CommentDTO commentDTO = modelMapper.map(comment, CommentDTO.class);
+            commentDTO.setUsername(comment.getUser().getUsername());
+            newCommentFormat.add(commentDTO);
+        }
 
-        return new PageImpl<>(film.getComments(), pageable, film.getComments().size());
+        return new PageImpl<>(newCommentFormat, pageable, film.getComments().size());
     }
 
 }
