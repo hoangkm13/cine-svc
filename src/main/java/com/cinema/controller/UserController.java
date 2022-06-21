@@ -1,10 +1,7 @@
 package com.cinema.controller;
 
-import com.cinema.controller.request.UpdateUserDTO;
+import com.cinema.controller.request.*;
 import com.cinema.exception.CustomException;
-import com.cinema.controller.request.LoginRequestDTO;
-import com.cinema.controller.request.LoginResponseDTO;
-import com.cinema.controller.request.UserDTO;
 import com.cinema.entities.User;
 import com.cinema.model.ApiResponse;
 import com.cinema.service.UserService;
@@ -57,6 +54,13 @@ public class UserController {
     public ApiResponse<UserDTO> updateUser(@PathVariable Long userId, @Valid @RequestBody UpdateUserDTO userDTO) throws CustomException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var user = userService.preCheckUpdateUserInfo(userDTO, Long.valueOf(authentication.getPrincipal().toString()), userId);
+        return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
+    }
+
+    @PostMapping(value = "changePassword/{userId}", produces = "application/json")
+    public ApiResponse<UserDTO> resetPassword(@PathVariable Long userId, @Valid @RequestBody ResetPasswordDTO resetPasswordDTO) throws CustomException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var user = userService.resetPassword(resetPasswordDTO, Long.valueOf(authentication.getPrincipal().toString()), userId);
         return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
     }
 }

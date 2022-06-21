@@ -1,6 +1,7 @@
 package com.cinema.service.impl;
 
 import com.cinema.constants.ErrorCode;
+import com.cinema.controller.request.ResetPasswordDTO;
 import com.cinema.controller.request.UpdateUserDTO;
 import com.cinema.controller.request.UserDTO;
 import com.cinema.entities.User;
@@ -106,6 +107,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             }
         }
         return this.updateUser123(updateUserDTO, existedUser);
+    }
+
+    @Override
+    public User resetPassword(ResetPasswordDTO resetPasswordDTO, Long currentUserId, Long userId) throws CustomException {
+        var existedUser = this.findById(currentUserId);
+
+        if (!Objects.equals(existedUser.getRole(), Role.ADMIN.getValue())) {
+            if (!Objects.equals(userId, existedUser.getId())) {
+                throw new CustomException(ErrorCode.AUTHORIZATION_ERROR);
+            }
+        }
+
+        existedUser.setPassword(passwordEncoder.encode(resetPasswordDTO.getPassword()));
+
+        return this.userRepository.saveAndFlush(existedUser);
     }
 
     private User updateUser123(UpdateUserDTO updateUserDTO, User existedUser) {
