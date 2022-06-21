@@ -26,9 +26,6 @@ public class User {
     private String username;
 
     @Column(length = 50)
-    private String fullName;
-
-    @Column(length = 50)
     private String firstName;
 
     @Column(length = 50)

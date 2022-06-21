@@ -9,6 +9,7 @@ import com.cinema.repository.DislikeRepository;
 import com.cinema.repository.FilmRepository;
 import com.cinema.repository.LikeRepository;
 import com.cinema.service.FilmService;
+import com.cinema.util.ListUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -131,7 +132,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Page<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
+    public List<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
         if (!Objects.equals(orderBy, "ASC") && !Objects.equals(orderBy, "DSC")) {
             throw new CustomException(ErrorCode.INVALID_ORDER_BY_METHOD);
         }
@@ -148,15 +149,15 @@ public class FilmServiceImpl implements FilmService {
                 break;
         }
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         List<CommentDTO> newCommentFormat = new ArrayList<>();
         for (Comment comment: film.getComments()) {
             CommentDTO commentDTO = modelMapper.map(comment, CommentDTO.class);
             commentDTO.setUsername(comment.getUser().getUsername());
+            commentDTO.setUserAvatar(comment.getUser().getAvatar());
             newCommentFormat.add(commentDTO);
         }
 
-        return new PageImpl<>(newCommentFormat, pageable, film.getComments().size());
+        return ListUtils.getPage(newCommentFormat, page, size);
     }
 
 }

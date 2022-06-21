@@ -36,6 +36,6 @@ public interface FilmService {
 
     Comment findByCommentId(Long id) throws CustomException;
 
-    Page<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException;
+    List<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException;
 
 }

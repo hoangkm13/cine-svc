@@ -20,9 +20,6 @@ public class UserDTO {
     @Length(max = 20, min = 6)
     private String username;
 
-    @NotBlank(message = "Tên khách hàng không được để trống !")
-    private String fullName;
-
     @NotBlank(message = "Giới tính không được để trống !")
     private String gender;
 

@@ -18,6 +18,8 @@ public class CommentDTO {
 
     private String username;
 
+    private String userAvatar;
+
     @NotNull
     private Long filmId;
 

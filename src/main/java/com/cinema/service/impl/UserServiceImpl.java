@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         int value = generator.nextInt(5) + 1;
 
         User user = new User();
-        user.setFullName(userDTO.getFullName());
         user.setGender(userDTO.getGender());
         user.setBirthOfDate(userDTO.getBirthOfDate());
         user.setMobile(userDTO.getMobile());
@@ -111,7 +110,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private User updateUser123(UpdateUserDTO updateUserDTO, User existedUser) {
 
-        existedUser.setFullName(updateUserDTO.getFullName() != null ? updateUserDTO.getFullName() : existedUser.getFullName());
         existedUser.setGender(updateUserDTO.getGender() != null ? updateUserDTO.getGender() : existedUser.getGender());
         existedUser.setBirthOfDate(updateUserDTO.getBirthOfDate()!= null ? updateUserDTO.getBirthOfDate() : existedUser.getBirthOfDate());
         existedUser.setMobile(updateUserDTO.getMobile() != null ? updateUserDTO.getMobile() : existedUser.getMobile());

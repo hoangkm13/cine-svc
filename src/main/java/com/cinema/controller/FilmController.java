@@ -129,7 +129,7 @@ public class FilmController {
     }
 
     @GetMapping(value = "/comment/pagination/{filmId}", produces = "application/json")
-    public ApiResponse<Page<CommentDTO>> getCommentPagination(@PathVariable Long filmId, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy, @RequestParam String orderBy) throws CustomException {
+    public ApiResponse<List<CommentDTO>> getCommentPagination(@PathVariable Long filmId, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy, @RequestParam String orderBy) throws CustomException {
         var entity = this.filmService.getCommentPagination(filmId, page, size, sortBy, orderBy);
         return ApiResponse.successWithResult(entity);
     }
