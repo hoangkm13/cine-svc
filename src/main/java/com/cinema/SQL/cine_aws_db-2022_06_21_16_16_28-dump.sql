@@ -65,7 +65,7 @@ CREATE TABLE `actor_film` (
 -- Dumping data for table `actor_film`
 --
 
-INSERT INTO `actor_film` VALUES (15,1),(15,2),(18,3),(19,3);
+INSERT INTO `actor_film` VALUES (1,1),(2,2),(3,3),(4,1),(5,2),(6,3),(7,1),(8,2),(9,3),(10,1),(11,2),(12,3),(13,1),(14,2),(15,3),(16,1),(17,2),(18,3),(19,1),(20,2),(21,3),(22,1),(23,2),(24,3),(25,1),(26,2),(27,3),(28,1),(29,2),(30,3),(31,1),(32,2),(33,3),(34,1),(35,2),(36,3),(37,1),(38,2),(39,3),(40,1),(41,2),(42,3),(43,1),(44,2),(45,3),(46,1),(47,2),(48,3),(49,1),(50,2),(1,3),(2,1),(3,2),(4,3),(5,1),(6,2),(7,3),(8,1),(9,2),(10,3),(11,1),(12,2),(13,3),(14,1),(15,2),(16,3),(17,1),(18,2),(19,3),(20,1),(21,2),(22,3),(23,1),(24,2),(25,3),(26,1),(27,2),(28,3),(29,1),(30,2),(31,3),(32,1),(33,2),(34,3),(35,1),(36,2),(37,3),(38,1),(39,2),(40,3),(41,1),(42,2),(43,3),(44,1),(45,2),(46,3),(47,1),(48,2),(49,3),(50,1);
 
 --
 -- Table structure for table `comment`
@@ -85,13 +85,14 @@ CREATE TABLE `comment` (
   KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
   CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FKb6gnv47yxa2jewd4jpvm3pnfk` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `comment`
 --
 
+INSERT INTO `comment` VALUES (1,'Comment by Nghia','2022-06-20 09:15:59',NULL,NULL),(2,'Comment by Nghia','2022-06-20 09:16:05',NULL,NULL),(3,'ádasdasdasd','2022-06-20 09:16:39',NULL,NULL),(4,'','2022-06-20 09:17:30',NULL,NULL),(5,'','2022-06-20 09:19:00',NULL,NULL),(6,'test02','2022-06-20 13:18:33',19,14),(7,'test04','2022-06-20 13:18:46',15,14),(8,'test03','2022-06-20 13:18:51',15,14),(9,'test03','2022-06-20 13:18:52',15,14),(10,'phim rat hay','2022-06-20 20:39:30',15,16),(11,'Comment By Ngoc Nghia','2022-06-20 15:14:40',42,14),(12,'Dcm Hoanggggggg','2022-06-20 15:16:57',42,14),(13,'Comment By Nghia','2022-06-20 15:18:13',42,14),(14,'DMMMM THANG HOANGGGGGG','2022-06-20 15:18:30',42,14),(15,'Test comment','2022-06-21 01:59:39',42,14),(16,'phim rat hay','2022-06-21 15:11:31',15,16),(17,'phim rat hay','2022-06-21 15:11:36',15,16),(18,'phim rat hay','2022-06-21 15:11:40',15,16),(19,'phim rat hay','2022-06-21 15:11:44',15,16),(20,'phim rat hay','2022-06-21 15:11:48',15,16),(21,'phim rat hay','2022-06-21 15:11:52',15,16),(22,'phim rat hay','2022-06-21 15:11:56',15,16),(23,'phim rat hay','2022-06-21 15:12:01',15,16),(24,'phim rat hay','2022-06-21 15:12:06',15,16),(25,'phim rat hay','2022-06-21 15:48:09',15,16);
 
 --
 -- Table structure for table `director`
@@ -274,20 +275,20 @@ CREATE TABLE `user` (
   `role` varchar(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `birth_of_date` varchar(50) DEFAULT NULL,
-  `full_name` varchar(50) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `mobile` varchar(50) DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` VALUES (14,'hoang.dz98666@gmail.com','$2a$10$fiy8ytJSx/aiBUVMYPk3wetJ8wPqsaeVOW1lJHwOm9DTFX6NmzedS','ROLE_ADMIN','hoangkm13',NULL,NULL,NULL,NULL,NULL,NULL),(15,'n1ckprivat3@gmail.com','$2a$10$qgvVYQlnDnFfxuquMqaYXOITzfxmpYIveRUTp9cO2JPSXIKOMdn/2','ROLE_USER','usertest01',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (14,'hoang.dz98666@gmail.com','$2a$10$fiy8ytJSx/aiBUVMYPk3wetJ8wPqsaeVOW1lJHwOm9DTFX6NmzedS','ROLE_ADMIN','hoangkm13',NULL,NULL,NULL,NULL,NULL,NULL),(15,'n1ckprivat3@gmail.com','$2a$10$qgvVYQlnDnFfxuquMqaYXOITzfxmpYIveRUTp9cO2JPSXIKOMdn/2','ROLE_USER','usertest01',NULL,NULL,NULL,NULL,NULL,NULL),(16,'hoan','$2a$10$epegePeJuM5X0X7MjfnXduSIagEKMqanYMMMJhIw/4.fyfnpRaTAG','ROLE_USER','tester1234567','13/05/1975','Nam','0918863388',NULL,NULL,'1.png'),(17,'truongquocviet2001@gmail.com','$2a$10$Kmhm5UG2V79nWQmagn2MGOwjLM01d95PwTqFk009ED8ZlWa3m29Ui','ROLE_USER','viet2001','2022-06-23T17:00:00.000Z','MALE','0905054200','Viet','Truong','5.png');
 
 --
 -- Table structure for table `view`
@@ -325,4 +326,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-19 23:28:38
+-- Dump completed on 2022-06-21 16:17:27
