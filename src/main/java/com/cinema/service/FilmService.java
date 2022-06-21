@@ -1,6 +1,7 @@
 package com.cinema.service;
 
 import com.cinema.controller.request.CommentDTO;
+import com.cinema.controller.response.CommentPaginationResponse;
 import com.cinema.exception.CustomException;
 import com.cinema.entities.*;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,6 @@ public interface FilmService {
 
     Comment findByCommentId(Long id) throws CustomException;
 
-    List<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException;
+    CommentPaginationResponse getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException;
 
 }

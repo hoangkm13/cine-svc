@@ -2,6 +2,7 @@ package com.cinema.service.impl;
 
 import com.cinema.constants.ErrorCode;
 import com.cinema.controller.request.CommentDTO;
+import com.cinema.controller.response.CommentPaginationResponse;
 import com.cinema.entities.*;
 import com.cinema.exception.CustomException;
 import com.cinema.repository.CommentRepository;
@@ -132,7 +133,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<CommentDTO> getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
+    public CommentPaginationResponse getCommentPagination(Long filmId, int page, int size, String sortBy, String orderBy) throws CustomException {
         if (!Objects.equals(orderBy, "ASC") && !Objects.equals(orderBy, "DSC")) {
             throw new CustomException(ErrorCode.INVALID_ORDER_BY_METHOD);
         }
@@ -157,7 +158,7 @@ public class FilmServiceImpl implements FilmService {
             newCommentFormat.add(commentDTO);
         }
 
-        return ListUtils.getPage(newCommentFormat, page, size);
+        return new CommentPaginationResponse(ListUtils.getPage(newCommentFormat, page, size), newCommentFormat.size());
     }
 
 }
