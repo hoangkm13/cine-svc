@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void checkPermission(Long userId) throws CustomException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = findByUsername(authentication.getName());
+        User currentUser = findById(Long.valueOf(authentication.getName()));
         if (!userId.equals(currentUser.getId()) && !authUtils.isAdmin()) {
             throw new CustomException(ErrorCode.AUTHORIZATION_ERROR);
         }

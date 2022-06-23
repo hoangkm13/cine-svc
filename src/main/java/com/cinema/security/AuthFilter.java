@@ -36,6 +36,19 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     *
+     * ServletRequest request: là HTTP request bao gồm những thông tin mà client gửi đến
+     *
+     * ServletResponse: HTTP response. Spring security sử dụng ServletResponse để chỉnh sửa response trước khi gửi lại cho client hoặc gửi cho các filter tiếp theo trong chuỗi.
+     *
+     * FilterChain chain: để forward request đến filter tiếp theo trong chuỗi.
+     *
+     * Authentication vs Authorization
+     * Authentication: quá trình xác minh user, dựa vào thông tin đăng nhập mà user cung cấp. Ví dụ khi login, bạn nhập username và password, nó giúp hệ thống nhận ra bạn là ai.
+     * Authorization: Quá tình xác định xem user có quyền thực hiện những chức năng nào của hệ thống (đọc/sửa/xóa data), sau khi user đã authenticated thành công.
+     */
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
