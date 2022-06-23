@@ -24,7 +24,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     public Favorite findById(Long id) throws CustomException {
         Optional<Favorite> optionalFavorite = favoriteRepository.findById(id);
         if (optionalFavorite.isEmpty()) {
-            throw new CustomException(ErrorCode.FAVOURITE_EXIST);
+            throw new CustomException(ErrorCode.FAVOURITE_NOT_EXIST);
         }
         return optionalFavorite.get();
     }
