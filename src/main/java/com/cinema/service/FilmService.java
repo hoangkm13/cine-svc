@@ -1,9 +1,8 @@
 package com.cinema.service;
 
-import com.cinema.controller.request.CommentDTO;
 import com.cinema.controller.response.CommentPaginationResponse;
-import com.cinema.exception.CustomException;
 import com.cinema.entities.*;
+import com.cinema.exception.CustomException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
