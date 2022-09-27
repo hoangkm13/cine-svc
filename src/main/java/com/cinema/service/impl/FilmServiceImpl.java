@@ -28,7 +28,6 @@ public class FilmServiceImpl implements FilmService {
     private final LikeRepository likeRepository;
     private final DislikeRepository dislikeRepository;
     private final CommentRepository commentRepository;
-
     private final ModelMapper modelMapper;
 
     @Override
