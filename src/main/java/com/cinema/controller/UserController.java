@@ -59,8 +59,8 @@ public class UserController {
 
     @PostMapping(value = "changePassword/{userId}", produces = "application/json")
     public ApiResponse<UserDTO> resetPassword(@PathVariable Long userId, @Valid @RequestBody ResetPasswordDTO resetPasswordDTO) throws CustomException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = userService.resetPassword(resetPasswordDTO, Long.valueOf(authentication.getPrincipal().toString()), userId);
-        return ApiResponse.successWithResult(modelMapper.map(user, UserDTO.class));
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        var user = userService.resetPassword(resetPasswordDTO, Long.valueOf(authentication.getPrincipal().toString()), userId);
+        return ApiResponse.successWithResult(modelMapper.map(null, UserDTO.class));
     }
 }

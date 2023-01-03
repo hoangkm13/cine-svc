@@ -50,8 +50,8 @@ public class FilmController {
 
     @GetMapping(value = "/search", produces = "application/json")
     public ApiResponse<Page<Film>> getSearchData(@RequestParam String searchText, @RequestParam int page, @RequestParam int size, @RequestParam String sortBy) {
-        Page<Film> films = filmService.search(searchText, page - 1, size, sortBy);
-        return ApiResponse.successWithResult(films);
+//        Page<Film> films = filmService.search(searchText, page - 1, size, sortBy);
+        return ApiResponse.successWithResult(null);
     }
 
     @GetMapping(value = "/{genre}", produces = "application/json")
