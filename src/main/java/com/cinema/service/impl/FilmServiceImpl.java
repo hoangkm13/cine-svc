@@ -33,7 +33,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public List<Film> findAllByGenres(Long genreId, int page, int size, String sortBy, List<Long> exludedFilmIds) {
         int offset = page * size;
-        return filmRepository.findAllByGenres(genreId, offset, size, sortBy, exludedFilmIds);
+        return filmRepository.findAllByGenres(genreId, offset, size, sortBy);
     }
 
     @Override

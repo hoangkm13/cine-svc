@@ -43,7 +43,7 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
             value = "select * from film f " +
                     "join film_genre fg on f.id = fg.film_id " +
                     "where fg.genre_id = :genre_id " +
-                    "and f.id not in (:exluded_film_ids) " +
+//                    "and f.id not in (:exluded_film_ids) " +
                     "order by :sort_by " +
                     "limit :size offset :offset"
     )
@@ -51,8 +51,8 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
             @Param("genre_id") Long genreId,
             @Param("offset") int offset,
             @Param("size") int size,
-            @Param("sort_by") String sortBy,
-            @Param("exluded_film_ids") List<Long> exludedFilmIds
+            @Param("sort_by") String sortBy
+//            @Param("exluded_film_ids") List<Long> exludedFilmIds
     );
 
 }
