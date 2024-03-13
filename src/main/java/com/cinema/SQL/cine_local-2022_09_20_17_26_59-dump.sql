@@ -1,8 +1,11 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+create database cine_local;
+use cine_local;
+
+-- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: cine_local
+-- Host: 172.17.0.2    Database: cine_local
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.3.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,10 +26,10 @@ DROP TABLE IF EXISTS `actor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `actor` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `age` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+                         `id` bigint NOT NULL AUTO_INCREMENT,
+                         `age` varchar(50) NOT NULL,
+                         `name` varchar(50) NOT NULL,
+                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,12 +51,12 @@ DROP TABLE IF EXISTS `actor_film`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `actor_film` (
-  `film_id` bigint NOT NULL,
-  `actor_id` bigint NOT NULL,
-  KEY `FK3nf2jjwluwx6klglcul22gc25` (`actor_id`),
-  KEY `FK80gycmnpxqtiaf3m3duaobefw` (`film_id`),
-  CONSTRAINT `FK3nf2jjwluwx6klglcul22gc25` FOREIGN KEY (`actor_id`) REFERENCES `actor` (`id`),
-  CONSTRAINT `FK80gycmnpxqtiaf3m3duaobefw` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                              `film_id` bigint NOT NULL,
+                              `actor_id` bigint NOT NULL,
+                              KEY `FK3nf2jjwluwx6klglcul22gc25` (`actor_id`),
+                              KEY `FK80gycmnpxqtiaf3m3duaobefw` (`film_id`),
+                              CONSTRAINT `FK3nf2jjwluwx6klglcul22gc25` FOREIGN KEY (`actor_id`) REFERENCES `actor` (`id`),
+                              CONSTRAINT `FK80gycmnpxqtiaf3m3duaobefw` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -75,16 +78,16 @@ DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comment` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `comment_text` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `film_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKb6gnv47yxa2jewd4jpvm3pnfk` (`film_id`),
-  KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
-  CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKb6gnv47yxa2jewd4jpvm3pnfk` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                           `id` bigint NOT NULL AUTO_INCREMENT,
+                           `comment_text` varchar(255) NOT NULL,
+                           `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                           `film_id` bigint DEFAULT NULL,
+                           `user_id` bigint DEFAULT NULL,
+                           PRIMARY KEY (`id`),
+                           KEY `FKb6gnv47yxa2jewd4jpvm3pnfk` (`film_id`),
+                           KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
+                           CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+                           CONSTRAINT `FKb6gnv47yxa2jewd4jpvm3pnfk` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -106,10 +109,10 @@ DROP TABLE IF EXISTS `director`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `director` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `age` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+                            `id` bigint NOT NULL AUTO_INCREMENT,
+                            `age` varchar(50) NOT NULL,
+                            `name` varchar(50) NOT NULL,
+                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -131,14 +134,14 @@ DROP TABLE IF EXISTS `dislikes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dislikes` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `film_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `DISLIKE_UC_FILM_ID_USER_ID` (`film_id`,`user_id`),
-  KEY `FK3ff9bl5beacb4i22r3ggkmglc` (`user_id`),
-  CONSTRAINT `FK3ff9bl5beacb4i22r3ggkmglc` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKunp2kk6149x25j6tnyv8p1tf` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                            `id` bigint NOT NULL AUTO_INCREMENT,
+                            `film_id` bigint DEFAULT NULL,
+                            `user_id` bigint DEFAULT NULL,
+                            PRIMARY KEY (`id`),
+                            UNIQUE KEY `DISLIKE_UC_FILM_ID_USER_ID` (`film_id`,`user_id`),
+                            KEY `FK3ff9bl5beacb4i22r3ggkmglc` (`user_id`),
+                            CONSTRAINT `FK3ff9bl5beacb4i22r3ggkmglc` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+                            CONSTRAINT `FKunp2kk6149x25j6tnyv8p1tf` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -159,14 +162,14 @@ DROP TABLE IF EXISTS `favorite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `film_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UC_FILM_ID_USER_ID` (`film_id`,`user_id`),
-  KEY `FKh3f2dg11ibnht4fvnmx60jcif` (`user_id`),
-  CONSTRAINT `FKh3f2dg11ibnht4fvnmx60jcif` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKu45lgbb7s8q9qdd83bf88672` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                            `id` bigint NOT NULL AUTO_INCREMENT,
+                            `film_id` bigint DEFAULT NULL,
+                            `user_id` bigint DEFAULT NULL,
+                            PRIMARY KEY (`id`),
+                            UNIQUE KEY `UC_FILM_ID_USER_ID` (`film_id`,`user_id`),
+                            KEY `FKh3f2dg11ibnht4fvnmx60jcif` (`user_id`),
+                            CONSTRAINT `FKh3f2dg11ibnht4fvnmx60jcif` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+                            CONSTRAINT `FKu45lgbb7s8q9qdd83bf88672` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -188,19 +191,19 @@ DROP TABLE IF EXISTS `film`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `film` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `description` longtext NOT NULL,
-  `maturity` int NOT NULL,
-  `slug` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `rating_star` int NOT NULL,
-  `director_id` bigint DEFAULT NULL,
-  `year` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK4pqpakiyka8wwbiicmc0rgtwi` (`director_id`),
-  CONSTRAINT `FK4pqpakiyka8wwbiicmc0rgtwi` FOREIGN KEY (`director_id`) REFERENCES `director` (`id`)
+                        `id` bigint NOT NULL AUTO_INCREMENT,
+                        `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                        `description` longtext NOT NULL,
+                        `maturity` int NOT NULL,
+                        `slug` varchar(100) NOT NULL,
+                        `title` varchar(100) NOT NULL,
+                        `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                        `rating_star` int NOT NULL,
+                        `director_id` bigint DEFAULT NULL,
+                        `year` int DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        KEY `FK4pqpakiyka8wwbiicmc0rgtwi` (`director_id`),
+                        CONSTRAINT `FK4pqpakiyka8wwbiicmc0rgtwi` FOREIGN KEY (`director_id`) REFERENCES `director` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -222,12 +225,12 @@ DROP TABLE IF EXISTS `film_genre`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `film_genre` (
-  `film_id` bigint NOT NULL,
-  `genre_id` bigint NOT NULL,
-  KEY `FKd4b34b812xlb3nxh9b9m021dk` (`genre_id`),
-  KEY `FKe3a6pfgbc4cglfjg7216egpig` (`film_id`),
-  CONSTRAINT `FKd4b34b812xlb3nxh9b9m021dk` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`),
-  CONSTRAINT `FKe3a6pfgbc4cglfjg7216egpig` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                              `film_id` bigint NOT NULL,
+                              `genre_id` bigint NOT NULL,
+                              KEY `FKd4b34b812xlb3nxh9b9m021dk` (`genre_id`),
+                              KEY `FKe3a6pfgbc4cglfjg7216egpig` (`film_id`),
+                              CONSTRAINT `FKd4b34b812xlb3nxh9b9m021dk` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`),
+                              CONSTRAINT `FKe3a6pfgbc4cglfjg7216egpig` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -249,9 +252,9 @@ DROP TABLE IF EXISTS `genre`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `genre` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+                         `id` bigint NOT NULL AUTO_INCREMENT,
+                         `name` varchar(50) NOT NULL,
+                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -273,14 +276,14 @@ DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `likes` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `film_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `LIKE_UC_FILM_ID_USER_ID` (`film_id`,`user_id`),
-  KEY `FKi2wo4dyk4rok7v4kak8sgkwx0` (`user_id`),
-  CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKs32mm0o2p5j82qgu9clyfrag4` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                         `id` bigint NOT NULL AUTO_INCREMENT,
+                         `film_id` bigint DEFAULT NULL,
+                         `user_id` bigint DEFAULT NULL,
+                         PRIMARY KEY (`id`),
+                         UNIQUE KEY `LIKE_UC_FILM_ID_USER_ID` (`film_id`,`user_id`),
+                         KEY `FKi2wo4dyk4rok7v4kak8sgkwx0` (`user_id`),
+                         CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+                         CONSTRAINT `FKs32mm0o2p5j82qgu9clyfrag4` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -301,13 +304,13 @@ DROP TABLE IF EXISTS `rating`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rating` (
-  `movie_id` int NOT NULL,
-  `create_timestamp` datetime(6) DEFAULT NULL,
-  `dislike` int DEFAULT NULL,
-  `likes` int NOT NULL,
-  `rating` double DEFAULT NULL,
-  `total_ratings` int DEFAULT NULL,
-  PRIMARY KEY (`movie_id`)
+                          `movie_id` int NOT NULL,
+                          `create_timestamp` datetime(6) DEFAULT NULL,
+                          `dislike` int DEFAULT NULL,
+                          `likes` int NOT NULL,
+                          `rating` double DEFAULT NULL,
+                          `total_ratings` int DEFAULT NULL,
+                          PRIMARY KEY (`movie_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -328,19 +331,19 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(20) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `birth_of_date` varchar(50) DEFAULT NULL,
-  `gender` varchar(255) DEFAULT NULL,
-  `mobile` varchar(50) DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
+                        `id` bigint NOT NULL AUTO_INCREMENT,
+                        `email` varchar(50) NOT NULL,
+                        `password` varchar(255) NOT NULL,
+                        `role` varchar(20) NOT NULL,
+                        `username` varchar(50) NOT NULL,
+                        `birth_of_date` varchar(50) DEFAULT NULL,
+                        `gender` varchar(255) DEFAULT NULL,
+                        `mobile` varchar(50) DEFAULT NULL,
+                        `first_name` varchar(50) DEFAULT NULL,
+                        `last_name` varchar(50) DEFAULT NULL,
+                        `avatar` varchar(255) DEFAULT NULL,
+                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,7 +352,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (14,'hoang.dz98666@gmail.com','$2a$10$fiy8ytJSx/aiBUVMYPk3wetJ8wPqsaeVOW1lJHwOm9DTFX6NmzedS','ROLE_ADMIN','hoangkm13','13/05/2001','MALE','0918863388','Khuất','Hoàng','2.png'),(15,'n1ckprivat3@gmail.com','$2a$10$qgvVYQlnDnFfxuquMqaYXOITzfxmpYIveRUTp9cO2JPSXIKOMdn/2','ROLE_USER','usertest01','13/05/2001',NULL,NULL,NULL,NULL,'3.png'),(16,'hoan','$2a$10$epegePeJuM5X0X7MjfnXduSIagEKMqanYMMMJhIw/4.fyfnpRaTAG','ROLE_USER','tester1234567','13/05/1975','Nam','0918863388',NULL,NULL,'1.png'),(17,'truongquocviet2001@gmail.com','$2a$10$Kmhm5UG2V79nWQmagn2MGOwjLM01d95PwTqFk009ED8ZlWa3m29Ui','ROLE_USER','viet2001','2022-06-23T17:00:00.000Z','MALE','0905054200','Viet','Truong','5.png');
+INSERT INTO `user` VALUES (14,'hoang.dz98666@gmail.com','$2a$10$fiy8ytJSx/aiBUVMYPk3wetJ8wPqsaeVOW1lJHwOm9DTFX6NmzedS','ROLE_ADMIN','hoangkm13','13/05/2001','MALE','0918863388','Khuất','Hoàng','2.png'),(15,'n1ckprivat3@gmail.com','$2a$10$qgvVYQlnDnFfxuquMqaYXOITzfxmpYIveRUTp9cO2JPSXIKOMdn/2','ROLE_USER','usertest01','13/05/2001',NULL,NULL,NULL,NULL,'3.png'),(16,'hoan','$2a$10$epegePeJuM5X0X7MjfnXduSIagEKMqanYMMMJhIw/4.fyfnpRaTAG','ROLE_USER','tester1234567','13/05/1975','Nam','0918863388',NULL,NULL,'1.png'),(17,'truongquocviet2001@gmail.com','$2a$10$Kmhm5UG2V79nWQmagn2MGOwjLM01d95PwTqFk009ED8ZlWa3m29Ui','ROLE_USER','viet2001','2022-06-23T17:00:00.000Z','MALE','0905054200','Viet','Truong','5.png'),(18,'hoang.km198299@sis.hust.edu.vn','$2a$10$lIeQqOLVXZWLCJf5PBj0YeLMg5HpukF50bC6I/ILQfUWrW/Oi7mTe','ROLE_ADMIN','hoangkmtest','2001-05-12T17:00:00.000Z',' ','0918863388','Hoang','Khuat','3.png');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,15 +364,15 @@ DROP TABLE IF EXISTS `view`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `view` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `film_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK52wlyyu8p7lgo3uqv3udc136` (`film_id`),
-  KEY `FK37w6bab99jhjeja56i1te4htp` (`user_id`),
-  CONSTRAINT `FK37w6bab99jhjeja56i1te4htp` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK52wlyyu8p7lgo3uqv3udc136` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
+                        `id` bigint NOT NULL AUTO_INCREMENT,
+                        `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                        `film_id` bigint DEFAULT NULL,
+                        `user_id` bigint DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        KEY `FK52wlyyu8p7lgo3uqv3udc136` (`film_id`),
+                        KEY `FK37w6bab99jhjeja56i1te4htp` (`user_id`),
+                        CONSTRAINT `FK37w6bab99jhjeja56i1te4htp` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+                        CONSTRAINT `FK52wlyyu8p7lgo3uqv3udc136` FOREIGN KEY (`film_id`) REFERENCES `film` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -392,9 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-20 17:26:59
-
-/*
- If u get this error (ONLY GROUP BY)
- Run this cmd: SET GLOBAL sql_mode='';
- */
+-- Dump completed on 2024-03-11 23:47:54
