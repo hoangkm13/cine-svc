@@ -27,6 +27,7 @@ public enum ErrorCode {
     FAVOURITE_EXIST("FAVOURITE_EXIST", "Phim đã được yêu thích"),
     GENRE_NOT_EXIST("GENRE_NOT_EXIST", "Thể loại không tồn tại"),
     GENRE_EXIST("GENRE_EXIST", "Thể loại tồn tại"),
+    OVER_REACH_TPS("503", "server not serving right now, please wait"),
     INVALID_ORDER_BY_METHOD("INVALID_ORDER_BY_METHOD", "Phương thức sắp xếp sai");
     private final String message;
     private final String code;
